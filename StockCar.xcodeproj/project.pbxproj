@@ -1,0 +1,745 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E72D5FA11F84B5F500D0C3CA /* SCTrackCardFrontEventGreenLaps.png in Resources */ = {isa = PBXBuildFile; fileRef = E72D5FA01F84B5F500D0C3CA /* SCTrackCardFrontEventGreenLaps.png */; };
+		E72D5FA41F8A3E1A00D0C3CA /* StockCarPlayer+AI.m in Sources */ = {isa = PBXBuildFile; fileRef = E72D5FA31F8A3E1A00D0C3CA /* StockCarPlayer+AI.m */; };
+		E72D5FAA1F8A711900D0C3CA /* StockCarController+QualificationPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = E72D5FA91F8A711900D0C3CA /* StockCarController+QualificationPhase.m */; };
+		E72D5FAD1F8A721200D0C3CA /* StockCarController+TrackPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = E72D5FAC1F8A721200D0C3CA /* StockCarController+TrackPhase.m */; };
+		E72D5FB01F8A7C9900D0C3CA /* StockCarController+ActionPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = E72D5FAF1F8A7C9900D0C3CA /* StockCarController+ActionPhase.m */; };
+		E74B1F1C1F8E65E1001BB376 /* StockCarController+RefillPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = E74B1F1B1F8E65E1001BB376 /* StockCarController+RefillPhase.m */; };
+		E74B1F1E1F8F6ED6001BB376 /* SCDashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = E74B1F1D1F8F6ED6001BB376 /* SCDashboard.png */; };
+		E74B1F211F8F6EFA001BB376 /* Dashboard.m in Sources */ = {isa = PBXBuildFile; fileRef = E74B1F201F8F6EFA001BB376 /* Dashboard.m */; };
+		E74B1F241F90757C001BB376 /* StockCarPlayer+QualiPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = E74B1F231F90757C001BB376 /* StockCarPlayer+QualiPhase.m */; };
+		E74B1F271F909319001BB376 /* StockCarPlayer+TrackPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = E74B1F261F909319001BB376 /* StockCarPlayer+TrackPhase.m */; };
+		E74B1F2A1F91F923001BB376 /* StockCarPlayer+ActionPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = E74B1F291F91F923001BB376 /* StockCarPlayer+ActionPhase.m */; };
+		E74B1F2C1F93689D001BB376 /* PitBoard.png in Resources */ = {isa = PBXBuildFile; fileRef = E74B1F2B1F93689C001BB376 /* PitBoard.png */; };
+		E74B1F2E1F938FDF001BB376 /* Pitboard.m in Sources */ = {isa = PBXBuildFile; fileRef = E74B1F2D1F938FDF001BB376 /* Pitboard.m */; };
+		E7BB1BEB1F7A474F0094F0DC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BB1BEA1F7A474F0094F0DC /* AppDelegate.m */; };
+		E7BB1BED1F7A474F0094F0DC /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E7BB1BEC1F7A474F0094F0DC /* GameScene.sks */; };
+		E7BB1BEF1F7A474F0094F0DC /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = E7BB1BEE1F7A474F0094F0DC /* Actions.sks */; };
+		E7BB1BF21F7A474F0094F0DC /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BB1BF11F7A474F0094F0DC /* GameScene.m */; };
+		E7BB1BF51F7A474F0094F0DC /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BB1BF41F7A474F0094F0DC /* GameViewController.m */; };
+		E7BB1BF81F7A474F0094F0DC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7BB1BF61F7A474F0094F0DC /* Main.storyboard */; };
+		E7BB1BFA1F7A474F0094F0DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7BB1BF91F7A474F0094F0DC /* Assets.xcassets */; };
+		E7BB1BFD1F7A474F0094F0DC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7BB1BFB1F7A474F0094F0DC /* LaunchScreen.storyboard */; };
+		E7BB1C001F7A474F0094F0DC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BB1BFF1F7A474F0094F0DC /* main.m */; };
+		E7BB1C0A1F7A474F0094F0DC /* StockCarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BB1C091F7A474F0094F0DC /* StockCarTests.m */; };
+		E7BB1C151F7A474F0094F0DC /* StockCarUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BB1C141F7A474F0094F0DC /* StockCarUITests.m */; };
+		E7BB1C231F7A4A370094F0DC /* TrackDefs.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BB1C221F7A4A370094F0DC /* TrackDefs.m */; };
+		E7BB1C271F7A80B40094F0DC /* Track.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BB1C261F7A80B40094F0DC /* Track.m */; };
+		E7BB1C2B1F7A8DBB0094F0DC /* StockCarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BB1C2A1F7A8DBB0094F0DC /* StockCarController.m */; };
+		E7BB1C2D1F7A8EE60094F0DC /* StockCarPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BB1C2C1F7A8EE60094F0DC /* StockCarPlayer.m */; };
+		E7BB1C301F7AA6AA0094F0DC /* DriverDeckDefs.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BB1C2F1F7AA6AA0094F0DC /* DriverDeckDefs.m */; };
+		E7BB1C391F7BE43C0094F0DC /* SCTrackCardFrontGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = E7BB1C331F7BE43B0094F0DC /* SCTrackCardFrontGreen.png */; };
+		E7BB1C3A1F7BE43C0094F0DC /* SCTrackCardBack.png in Resources */ = {isa = PBXBuildFile; fileRef = E7BB1C341F7BE43B0094F0DC /* SCTrackCardBack.png */; };
+		E7BB1C3B1F7BE43C0094F0DC /* nascarYellow46.png in Resources */ = {isa = PBXBuildFile; fileRef = E7BB1C351F7BE43B0094F0DC /* nascarYellow46.png */; };
+		E7BB1C3C1F7BE43C0094F0DC /* SCDriverCardBack.png in Resources */ = {isa = PBXBuildFile; fileRef = E7BB1C361F7BE43C0094F0DC /* SCDriverCardBack.png */; };
+		E7BB1C431F7C02190094F0DC /* nascarpic1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E7BB1C421F7C02190094F0DC /* nascarpic1.jpg */; };
+		E7BB1C4A1F7D0EAD0094F0DC /* iconRetroComputerGraphic.png in Resources */ = {isa = PBXBuildFile; fileRef = E7BB1C481F7D0EAD0094F0DC /* iconRetroComputerGraphic.png */; };
+		E7BB1C4B1F7D0EAD0094F0DC /* iconRetroHumanGraphic.png in Resources */ = {isa = PBXBuildFile; fileRef = E7BB1C491F7D0EAD0094F0DC /* iconRetroHumanGraphic.png */; };
+		E7BB1C4F1F82B5940094F0DC /* SCDriverCardFront_Yel.png in Resources */ = {isa = PBXBuildFile; fileRef = E7BB1C4C1F82B5940094F0DC /* SCDriverCardFront_Yel.png */; };
+		E7BB1C501F82B5940094F0DC /* SCDriverCardFront_LtBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = E7BB1C4D1F82B5940094F0DC /* SCDriverCardFront_LtBlue.png */; };
+		E7BB1C511F82B5940094F0DC /* SCDriverCardFront_Red.png in Resources */ = {isa = PBXBuildFile; fileRef = E7BB1C4E1F82B5940094F0DC /* SCDriverCardFront_Red.png */; };
+		E7BB1C531F82B9BF0094F0DC /* nascarbanking.png in Resources */ = {isa = PBXBuildFile; fileRef = E7BB1C521F82B9BF0094F0DC /* nascarbanking.png */; };
+		E7BB1C5A1F83BFD20094F0DC /* SCTrackCardFrontEventYellow.png in Resources */ = {isa = PBXBuildFile; fileRef = E7BB1C581F83BFD20094F0DC /* SCTrackCardFrontEventYellow.png */; };
+		E7BB1C5B1F83BFD20094F0DC /* SCTrackCardFrontEventGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = E7BB1C591F83BFD20094F0DC /* SCTrackCardFrontEventGreen.png */; };
+		E7BB1C5D1F83DE4B0094F0DC /* RedButton in Resources */ = {isa = PBXBuildFile; fileRef = E7BB1C5C1F83DE4B0094F0DC /* RedButton */; };
+		E7BB1C601F840AD90094F0DC /* nascarBlue46.png in Resources */ = {isa = PBXBuildFile; fileRef = E7BB1C5E1F840AD90094F0DC /* nascarBlue46.png */; };
+		E7BB1C611F840AD90094F0DC /* nascarRed46.png in Resources */ = {isa = PBXBuildFile; fileRef = E7BB1C5F1F840AD90094F0DC /* nascarRed46.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E7BB1C061F7A474F0094F0DC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E7BB1BDE1F7A474F0094F0DC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E7BB1BE51F7A474F0094F0DC;
+			remoteInfo = StockCar;
+		};
+		E7BB1C111F7A474F0094F0DC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E7BB1BDE1F7A474F0094F0DC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E7BB1BE51F7A474F0094F0DC;
+			remoteInfo = StockCar;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		E72D5FA01F84B5F500D0C3CA /* SCTrackCardFrontEventGreenLaps.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SCTrackCardFrontEventGreenLaps.png; sourceTree = "<group>"; };
+		E72D5FA21F8A3D7700D0C3CA /* StockCarPlayer+AI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StockCarPlayer+AI.h"; sourceTree = "<group>"; };
+		E72D5FA31F8A3E1A00D0C3CA /* StockCarPlayer+AI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "StockCarPlayer+AI.m"; sourceTree = "<group>"; };
+		E72D5FA81F8A711900D0C3CA /* StockCarController+QualificationPhase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StockCarController+QualificationPhase.h"; sourceTree = "<group>"; };
+		E72D5FA91F8A711900D0C3CA /* StockCarController+QualificationPhase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "StockCarController+QualificationPhase.m"; sourceTree = "<group>"; };
+		E72D5FAB1F8A721200D0C3CA /* StockCarController+TrackPhase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StockCarController+TrackPhase.h"; sourceTree = "<group>"; };
+		E72D5FAC1F8A721200D0C3CA /* StockCarController+TrackPhase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "StockCarController+TrackPhase.m"; sourceTree = "<group>"; };
+		E72D5FAE1F8A7C9900D0C3CA /* StockCarController+ActionPhase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StockCarController+ActionPhase.h"; sourceTree = "<group>"; };
+		E72D5FAF1F8A7C9900D0C3CA /* StockCarController+ActionPhase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "StockCarController+ActionPhase.m"; sourceTree = "<group>"; };
+		E74B1F1A1F8E65E1001BB376 /* StockCarController+RefillPhase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StockCarController+RefillPhase.h"; sourceTree = "<group>"; };
+		E74B1F1B1F8E65E1001BB376 /* StockCarController+RefillPhase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "StockCarController+RefillPhase.m"; sourceTree = "<group>"; };
+		E74B1F1D1F8F6ED6001BB376 /* SCDashboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SCDashboard.png; sourceTree = "<group>"; };
+		E74B1F1F1F8F6EFA001BB376 /* Dashboard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Dashboard.h; sourceTree = "<group>"; };
+		E74B1F201F8F6EFA001BB376 /* Dashboard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Dashboard.m; sourceTree = "<group>"; };
+		E74B1F221F90757C001BB376 /* StockCarPlayer+QualiPhase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StockCarPlayer+QualiPhase.h"; sourceTree = "<group>"; };
+		E74B1F231F90757C001BB376 /* StockCarPlayer+QualiPhase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "StockCarPlayer+QualiPhase.m"; sourceTree = "<group>"; };
+		E74B1F251F909319001BB376 /* StockCarPlayer+TrackPhase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StockCarPlayer+TrackPhase.h"; sourceTree = "<group>"; };
+		E74B1F261F909319001BB376 /* StockCarPlayer+TrackPhase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "StockCarPlayer+TrackPhase.m"; sourceTree = "<group>"; };
+		E74B1F281F91F923001BB376 /* StockCarPlayer+ActionPhase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StockCarPlayer+ActionPhase.h"; sourceTree = "<group>"; };
+		E74B1F291F91F923001BB376 /* StockCarPlayer+ActionPhase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "StockCarPlayer+ActionPhase.m"; sourceTree = "<group>"; };
+		E74B1F2B1F93689C001BB376 /* PitBoard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PitBoard.png; sourceTree = "<group>"; };
+		E74B1F2D1F938FDF001BB376 /* Pitboard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Pitboard.m; sourceTree = "<group>"; };
+		E74B1F2F1F938FF5001BB376 /* Pitboard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pitboard.h; sourceTree = "<group>"; };
+		E7BB1BE61F7A474F0094F0DC /* StockCar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StockCar.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7BB1BE91F7A474F0094F0DC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		E7BB1BEA1F7A474F0094F0DC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		E7BB1BEC1F7A474F0094F0DC /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		E7BB1BEE1F7A474F0094F0DC /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
+		E7BB1BF01F7A474F0094F0DC /* GameScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
+		E7BB1BF11F7A474F0094F0DC /* GameScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
+		E7BB1BF31F7A474F0094F0DC /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
+		E7BB1BF41F7A474F0094F0DC /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		E7BB1BF71F7A474F0094F0DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E7BB1BF91F7A474F0094F0DC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E7BB1BFC1F7A474F0094F0DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E7BB1BFE1F7A474F0094F0DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E7BB1BFF1F7A474F0094F0DC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E7BB1C051F7A474F0094F0DC /* StockCarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StockCarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7BB1C091F7A474F0094F0DC /* StockCarTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StockCarTests.m; sourceTree = "<group>"; };
+		E7BB1C0B1F7A474F0094F0DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E7BB1C101F7A474F0094F0DC /* StockCarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StockCarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7BB1C141F7A474F0094F0DC /* StockCarUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StockCarUITests.m; sourceTree = "<group>"; };
+		E7BB1C161F7A474F0094F0DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E7BB1C221F7A4A370094F0DC /* TrackDefs.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrackDefs.m; sourceTree = "<group>"; };
+		E7BB1C241F7A4A4B0094F0DC /* TrackDefs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrackDefs.h; sourceTree = "<group>"; };
+		E7BB1C251F7A809E0094F0DC /* Track.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Track.h; sourceTree = "<group>"; };
+		E7BB1C261F7A80B40094F0DC /* Track.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Track.m; sourceTree = "<group>"; };
+		E7BB1C281F7A89660094F0DC /* StockCarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StockCarController.h; sourceTree = "<group>"; };
+		E7BB1C291F7A8A3A0094F0DC /* StockCarPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StockCarPlayer.h; sourceTree = "<group>"; };
+		E7BB1C2A1F7A8DBB0094F0DC /* StockCarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StockCarController.m; sourceTree = "<group>"; };
+		E7BB1C2C1F7A8EE60094F0DC /* StockCarPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StockCarPlayer.m; sourceTree = "<group>"; };
+		E7BB1C2E1F7AA4410094F0DC /* DriverDeckDefs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DriverDeckDefs.h; sourceTree = "<group>"; };
+		E7BB1C2F1F7AA6AA0094F0DC /* DriverDeckDefs.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DriverDeckDefs.m; sourceTree = "<group>"; };
+		E7BB1C331F7BE43B0094F0DC /* SCTrackCardFrontGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SCTrackCardFrontGreen.png; sourceTree = "<group>"; };
+		E7BB1C341F7BE43B0094F0DC /* SCTrackCardBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SCTrackCardBack.png; sourceTree = "<group>"; };
+		E7BB1C351F7BE43B0094F0DC /* nascarYellow46.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nascarYellow46.png; sourceTree = "<group>"; };
+		E7BB1C361F7BE43C0094F0DC /* SCDriverCardBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SCDriverCardBack.png; sourceTree = "<group>"; };
+		E7BB1C421F7C02190094F0DC /* nascarpic1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nascarpic1.jpg; sourceTree = "<group>"; };
+		E7BB1C481F7D0EAD0094F0DC /* iconRetroComputerGraphic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconRetroComputerGraphic.png; sourceTree = "<group>"; };
+		E7BB1C491F7D0EAD0094F0DC /* iconRetroHumanGraphic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconRetroHumanGraphic.png; sourceTree = "<group>"; };
+		E7BB1C4C1F82B5940094F0DC /* SCDriverCardFront_Yel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SCDriverCardFront_Yel.png; sourceTree = "<group>"; };
+		E7BB1C4D1F82B5940094F0DC /* SCDriverCardFront_LtBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SCDriverCardFront_LtBlue.png; sourceTree = "<group>"; };
+		E7BB1C4E1F82B5940094F0DC /* SCDriverCardFront_Red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SCDriverCardFront_Red.png; sourceTree = "<group>"; };
+		E7BB1C521F82B9BF0094F0DC /* nascarbanking.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nascarbanking.png; sourceTree = "<group>"; };
+		E7BB1C581F83BFD20094F0DC /* SCTrackCardFrontEventYellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SCTrackCardFrontEventYellow.png; sourceTree = "<group>"; };
+		E7BB1C591F83BFD20094F0DC /* SCTrackCardFrontEventGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SCTrackCardFrontEventGreen.png; sourceTree = "<group>"; };
+		E7BB1C5C1F83DE4B0094F0DC /* RedButton */ = {isa = PBXFileReference; lastKnownFileType = file; path = RedButton; sourceTree = "<group>"; };
+		E7BB1C5E1F840AD90094F0DC /* nascarBlue46.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nascarBlue46.png; sourceTree = "<group>"; };
+		E7BB1C5F1F840AD90094F0DC /* nascarRed46.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nascarRed46.png; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E7BB1BE31F7A474F0094F0DC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7BB1C021F7A474F0094F0DC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7BB1C0D1F7A474F0094F0DC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E7BB1BDD1F7A474F0094F0DC = {
+			isa = PBXGroup;
+			children = (
+				E7BB1BE81F7A474F0094F0DC /* StockCar */,
+				E7BB1C081F7A474F0094F0DC /* StockCarTests */,
+				E7BB1C131F7A474F0094F0DC /* StockCarUITests */,
+				E7BB1BE71F7A474F0094F0DC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E7BB1BE71F7A474F0094F0DC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E7BB1BE61F7A474F0094F0DC /* StockCar.app */,
+				E7BB1C051F7A474F0094F0DC /* StockCarTests.xctest */,
+				E7BB1C101F7A474F0094F0DC /* StockCarUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E7BB1BE81F7A474F0094F0DC /* StockCar */ = {
+			isa = PBXGroup;
+			children = (
+				E7BB1C3F1F7BFA440094F0DC /* Textures */,
+				E7BB1BE91F7A474F0094F0DC /* AppDelegate.h */,
+				E7BB1BEA1F7A474F0094F0DC /* AppDelegate.m */,
+				E7BB1BEC1F7A474F0094F0DC /* GameScene.sks */,
+				E7BB1BEE1F7A474F0094F0DC /* Actions.sks */,
+				E7BB1BF01F7A474F0094F0DC /* GameScene.h */,
+				E7BB1BF11F7A474F0094F0DC /* GameScene.m */,
+				E7BB1BF31F7A474F0094F0DC /* GameViewController.h */,
+				E7BB1BF41F7A474F0094F0DC /* GameViewController.m */,
+				E7BB1BF61F7A474F0094F0DC /* Main.storyboard */,
+				E7BB1BF91F7A474F0094F0DC /* Assets.xcassets */,
+				E7BB1BFB1F7A474F0094F0DC /* LaunchScreen.storyboard */,
+				E7BB1BFE1F7A474F0094F0DC /* Info.plist */,
+				E7BB1BFF1F7A474F0094F0DC /* main.m */,
+				E7BB1C221F7A4A370094F0DC /* TrackDefs.m */,
+				E7BB1C241F7A4A4B0094F0DC /* TrackDefs.h */,
+				E7BB1C251F7A809E0094F0DC /* Track.h */,
+				E7BB1C261F7A80B40094F0DC /* Track.m */,
+				E7BB1C281F7A89660094F0DC /* StockCarController.h */,
+				E7BB1C2A1F7A8DBB0094F0DC /* StockCarController.m */,
+				E72D5FA81F8A711900D0C3CA /* StockCarController+QualificationPhase.h */,
+				E72D5FA91F8A711900D0C3CA /* StockCarController+QualificationPhase.m */,
+				E72D5FAB1F8A721200D0C3CA /* StockCarController+TrackPhase.h */,
+				E72D5FAC1F8A721200D0C3CA /* StockCarController+TrackPhase.m */,
+				E72D5FAE1F8A7C9900D0C3CA /* StockCarController+ActionPhase.h */,
+				E72D5FAF1F8A7C9900D0C3CA /* StockCarController+ActionPhase.m */,
+				E74B1F1A1F8E65E1001BB376 /* StockCarController+RefillPhase.h */,
+				E74B1F1B1F8E65E1001BB376 /* StockCarController+RefillPhase.m */,
+				E7BB1C291F7A8A3A0094F0DC /* StockCarPlayer.h */,
+				E7BB1C2C1F7A8EE60094F0DC /* StockCarPlayer.m */,
+				E74B1F221F90757C001BB376 /* StockCarPlayer+QualiPhase.h */,
+				E74B1F231F90757C001BB376 /* StockCarPlayer+QualiPhase.m */,
+				E74B1F251F909319001BB376 /* StockCarPlayer+TrackPhase.h */,
+				E74B1F261F909319001BB376 /* StockCarPlayer+TrackPhase.m */,
+				E74B1F281F91F923001BB376 /* StockCarPlayer+ActionPhase.h */,
+				E74B1F291F91F923001BB376 /* StockCarPlayer+ActionPhase.m */,
+				E72D5FA21F8A3D7700D0C3CA /* StockCarPlayer+AI.h */,
+				E72D5FA31F8A3E1A00D0C3CA /* StockCarPlayer+AI.m */,
+				E7BB1C2E1F7AA4410094F0DC /* DriverDeckDefs.h */,
+				E7BB1C2F1F7AA6AA0094F0DC /* DriverDeckDefs.m */,
+				E74B1F1F1F8F6EFA001BB376 /* Dashboard.h */,
+				E74B1F201F8F6EFA001BB376 /* Dashboard.m */,
+				E74B1F2F1F938FF5001BB376 /* Pitboard.h */,
+				E74B1F2D1F938FDF001BB376 /* Pitboard.m */,
+			);
+			path = StockCar;
+			sourceTree = "<group>";
+		};
+		E7BB1C081F7A474F0094F0DC /* StockCarTests */ = {
+			isa = PBXGroup;
+			children = (
+				E7BB1C091F7A474F0094F0DC /* StockCarTests.m */,
+				E7BB1C0B1F7A474F0094F0DC /* Info.plist */,
+			);
+			path = StockCarTests;
+			sourceTree = "<group>";
+		};
+		E7BB1C131F7A474F0094F0DC /* StockCarUITests */ = {
+			isa = PBXGroup;
+			children = (
+				E7BB1C141F7A474F0094F0DC /* StockCarUITests.m */,
+				E7BB1C161F7A474F0094F0DC /* Info.plist */,
+			);
+			path = StockCarUITests;
+			sourceTree = "<group>";
+		};
+		E7BB1C3F1F7BFA440094F0DC /* Textures */ = {
+			isa = PBXGroup;
+			children = (
+				E74B1F2B1F93689C001BB376 /* PitBoard.png */,
+				E74B1F1D1F8F6ED6001BB376 /* SCDashboard.png */,
+				E72D5FA01F84B5F500D0C3CA /* SCTrackCardFrontEventGreenLaps.png */,
+				E7BB1C5E1F840AD90094F0DC /* nascarBlue46.png */,
+				E7BB1C5F1F840AD90094F0DC /* nascarRed46.png */,
+				E7BB1C5C1F83DE4B0094F0DC /* RedButton */,
+				E7BB1C591F83BFD20094F0DC /* SCTrackCardFrontEventGreen.png */,
+				E7BB1C581F83BFD20094F0DC /* SCTrackCardFrontEventYellow.png */,
+				E7BB1C521F82B9BF0094F0DC /* nascarbanking.png */,
+				E7BB1C4D1F82B5940094F0DC /* SCDriverCardFront_LtBlue.png */,
+				E7BB1C4E1F82B5940094F0DC /* SCDriverCardFront_Red.png */,
+				E7BB1C4C1F82B5940094F0DC /* SCDriverCardFront_Yel.png */,
+				E7BB1C481F7D0EAD0094F0DC /* iconRetroComputerGraphic.png */,
+				E7BB1C491F7D0EAD0094F0DC /* iconRetroHumanGraphic.png */,
+				E7BB1C421F7C02190094F0DC /* nascarpic1.jpg */,
+				E7BB1C351F7BE43B0094F0DC /* nascarYellow46.png */,
+				E7BB1C361F7BE43C0094F0DC /* SCDriverCardBack.png */,
+				E7BB1C341F7BE43B0094F0DC /* SCTrackCardBack.png */,
+				E7BB1C331F7BE43B0094F0DC /* SCTrackCardFrontGreen.png */,
+			);
+			path = Textures;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E7BB1BE51F7A474F0094F0DC /* StockCar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E7BB1C191F7A474F0094F0DC /* Build configuration list for PBXNativeTarget "StockCar" */;
+			buildPhases = (
+				E7BB1BE21F7A474F0094F0DC /* Sources */,
+				E7BB1BE31F7A474F0094F0DC /* Frameworks */,
+				E7BB1BE41F7A474F0094F0DC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StockCar;
+			productName = StockCar;
+			productReference = E7BB1BE61F7A474F0094F0DC /* StockCar.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E7BB1C041F7A474F0094F0DC /* StockCarTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E7BB1C1C1F7A474F0094F0DC /* Build configuration list for PBXNativeTarget "StockCarTests" */;
+			buildPhases = (
+				E7BB1C011F7A474F0094F0DC /* Sources */,
+				E7BB1C021F7A474F0094F0DC /* Frameworks */,
+				E7BB1C031F7A474F0094F0DC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E7BB1C071F7A474F0094F0DC /* PBXTargetDependency */,
+			);
+			name = StockCarTests;
+			productName = StockCarTests;
+			productReference = E7BB1C051F7A474F0094F0DC /* StockCarTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		E7BB1C0F1F7A474F0094F0DC /* StockCarUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E7BB1C1F1F7A474F0094F0DC /* Build configuration list for PBXNativeTarget "StockCarUITests" */;
+			buildPhases = (
+				E7BB1C0C1F7A474F0094F0DC /* Sources */,
+				E7BB1C0D1F7A474F0094F0DC /* Frameworks */,
+				E7BB1C0E1F7A474F0094F0DC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E7BB1C121F7A474F0094F0DC /* PBXTargetDependency */,
+			);
+			name = StockCarUITests;
+			productName = StockCarUITests;
+			productReference = E7BB1C101F7A474F0094F0DC /* StockCarUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E7BB1BDE1F7A474F0094F0DC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = "Alan Jenkins";
+				TargetAttributes = {
+					E7BB1BE51F7A474F0094F0DC = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+					E7BB1C041F7A474F0094F0DC = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = E7BB1BE51F7A474F0094F0DC;
+					};
+					E7BB1C0F1F7A474F0094F0DC = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = E7BB1BE51F7A474F0094F0DC;
+					};
+				};
+			};
+			buildConfigurationList = E7BB1BE11F7A474F0094F0DC /* Build configuration list for PBXProject "StockCar" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E7BB1BDD1F7A474F0094F0DC;
+			productRefGroup = E7BB1BE71F7A474F0094F0DC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E7BB1BE51F7A474F0094F0DC /* StockCar */,
+				E7BB1C041F7A474F0094F0DC /* StockCarTests */,
+				E7BB1C0F1F7A474F0094F0DC /* StockCarUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E7BB1BE41F7A474F0094F0DC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7BB1C4F1F82B5940094F0DC /* SCDriverCardFront_Yel.png in Resources */,
+				E7BB1C611F840AD90094F0DC /* nascarRed46.png in Resources */,
+				E7BB1C601F840AD90094F0DC /* nascarBlue46.png in Resources */,
+				E7BB1C3B1F7BE43C0094F0DC /* nascarYellow46.png in Resources */,
+				E7BB1C501F82B5940094F0DC /* SCDriverCardFront_LtBlue.png in Resources */,
+				E7BB1C5A1F83BFD20094F0DC /* SCTrackCardFrontEventYellow.png in Resources */,
+				E7BB1C391F7BE43C0094F0DC /* SCTrackCardFrontGreen.png in Resources */,
+				E7BB1C4A1F7D0EAD0094F0DC /* iconRetroComputerGraphic.png in Resources */,
+				E7BB1BF81F7A474F0094F0DC /* Main.storyboard in Resources */,
+				E7BB1BED1F7A474F0094F0DC /* GameScene.sks in Resources */,
+				E7BB1C3C1F7BE43C0094F0DC /* SCDriverCardBack.png in Resources */,
+				E7BB1BFA1F7A474F0094F0DC /* Assets.xcassets in Resources */,
+				E7BB1C4B1F7D0EAD0094F0DC /* iconRetroHumanGraphic.png in Resources */,
+				E7BB1C3A1F7BE43C0094F0DC /* SCTrackCardBack.png in Resources */,
+				E7BB1C5B1F83BFD20094F0DC /* SCTrackCardFrontEventGreen.png in Resources */,
+				E7BB1C511F82B5940094F0DC /* SCDriverCardFront_Red.png in Resources */,
+				E72D5FA11F84B5F500D0C3CA /* SCTrackCardFrontEventGreenLaps.png in Resources */,
+				E7BB1BFD1F7A474F0094F0DC /* LaunchScreen.storyboard in Resources */,
+				E74B1F1E1F8F6ED6001BB376 /* SCDashboard.png in Resources */,
+				E7BB1C5D1F83DE4B0094F0DC /* RedButton in Resources */,
+				E74B1F2C1F93689D001BB376 /* PitBoard.png in Resources */,
+				E7BB1BEF1F7A474F0094F0DC /* Actions.sks in Resources */,
+				E7BB1C431F7C02190094F0DC /* nascarpic1.jpg in Resources */,
+				E7BB1C531F82B9BF0094F0DC /* nascarbanking.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7BB1C031F7A474F0094F0DC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7BB1C0E1F7A474F0094F0DC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E7BB1BE21F7A474F0094F0DC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E72D5FA41F8A3E1A00D0C3CA /* StockCarPlayer+AI.m in Sources */,
+				E7BB1C2B1F7A8DBB0094F0DC /* StockCarController.m in Sources */,
+				E7BB1C301F7AA6AA0094F0DC /* DriverDeckDefs.m in Sources */,
+				E74B1F211F8F6EFA001BB376 /* Dashboard.m in Sources */,
+				E7BB1BF21F7A474F0094F0DC /* GameScene.m in Sources */,
+				E74B1F2E1F938FDF001BB376 /* Pitboard.m in Sources */,
+				E74B1F241F90757C001BB376 /* StockCarPlayer+QualiPhase.m in Sources */,
+				E74B1F271F909319001BB376 /* StockCarPlayer+TrackPhase.m in Sources */,
+				E74B1F1C1F8E65E1001BB376 /* StockCarController+RefillPhase.m in Sources */,
+				E7BB1C2D1F7A8EE60094F0DC /* StockCarPlayer.m in Sources */,
+				E72D5FAD1F8A721200D0C3CA /* StockCarController+TrackPhase.m in Sources */,
+				E7BB1BF51F7A474F0094F0DC /* GameViewController.m in Sources */,
+				E7BB1C001F7A474F0094F0DC /* main.m in Sources */,
+				E74B1F2A1F91F923001BB376 /* StockCarPlayer+ActionPhase.m in Sources */,
+				E72D5FB01F8A7C9900D0C3CA /* StockCarController+ActionPhase.m in Sources */,
+				E7BB1C271F7A80B40094F0DC /* Track.m in Sources */,
+				E7BB1C231F7A4A370094F0DC /* TrackDefs.m in Sources */,
+				E7BB1BEB1F7A474F0094F0DC /* AppDelegate.m in Sources */,
+				E72D5FAA1F8A711900D0C3CA /* StockCarController+QualificationPhase.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7BB1C011F7A474F0094F0DC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7BB1C0A1F7A474F0094F0DC /* StockCarTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7BB1C0C1F7A474F0094F0DC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7BB1C151F7A474F0094F0DC /* StockCarUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E7BB1C071F7A474F0094F0DC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E7BB1BE51F7A474F0094F0DC /* StockCar */;
+			targetProxy = E7BB1C061F7A474F0094F0DC /* PBXContainerItemProxy */;
+		};
+		E7BB1C121F7A474F0094F0DC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E7BB1BE51F7A474F0094F0DC /* StockCar */;
+			targetProxy = E7BB1C111F7A474F0094F0DC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E7BB1BF61F7A474F0094F0DC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E7BB1BF71F7A474F0094F0DC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		E7BB1BFB1F7A474F0094F0DC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E7BB1BFC1F7A474F0094F0DC /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E7BB1C171F7A474F0094F0DC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		E7BB1C181F7A474F0094F0DC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E7BB1C1A1F7A474F0094F0DC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PZC4VS8U3C;
+				INFOPLIST_FILE = StockCar/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = none.StockCar;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		E7BB1C1B1F7A474F0094F0DC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PZC4VS8U3C;
+				INFOPLIST_FILE = StockCar/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = none.StockCar;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Release;
+		};
+		E7BB1C1D1F7A474F0094F0DC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PZC4VS8U3C;
+				INFOPLIST_FILE = StockCarTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = none.StockCarTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StockCar.app/StockCar";
+			};
+			name = Debug;
+		};
+		E7BB1C1E1F7A474F0094F0DC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PZC4VS8U3C;
+				INFOPLIST_FILE = StockCarTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = none.StockCarTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StockCar.app/StockCar";
+			};
+			name = Release;
+		};
+		E7BB1C201F7A474F0094F0DC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PZC4VS8U3C;
+				INFOPLIST_FILE = StockCarUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = none.StockCarUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = StockCar;
+			};
+			name = Debug;
+		};
+		E7BB1C211F7A474F0094F0DC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PZC4VS8U3C;
+				INFOPLIST_FILE = StockCarUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = none.StockCarUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = StockCar;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E7BB1BE11F7A474F0094F0DC /* Build configuration list for PBXProject "StockCar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7BB1C171F7A474F0094F0DC /* Debug */,
+				E7BB1C181F7A474F0094F0DC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E7BB1C191F7A474F0094F0DC /* Build configuration list for PBXNativeTarget "StockCar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7BB1C1A1F7A474F0094F0DC /* Debug */,
+				E7BB1C1B1F7A474F0094F0DC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E7BB1C1C1F7A474F0094F0DC /* Build configuration list for PBXNativeTarget "StockCarTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7BB1C1D1F7A474F0094F0DC /* Debug */,
+				E7BB1C1E1F7A474F0094F0DC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E7BB1C1F1F7A474F0094F0DC /* Build configuration list for PBXNativeTarget "StockCarUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7BB1C201F7A474F0094F0DC /* Debug */,
+				E7BB1C211F7A474F0094F0DC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E7BB1BDE1F7A474F0094F0DC /* Project object */;
+}

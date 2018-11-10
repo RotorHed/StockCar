@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[StockCarController(TrackPhase) DrawTrackCards]:StockCarController+TrackPhase.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[DriverCard initWithAction:Type:Texture:]:DriverDeckDefs.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[StockCarController(ActionPhase) HandleResponseWithCard:ByPlayerInLD:]:StockCarController+ActionPhase.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[StockCarController(QualificationPhase) StartQualificationPhase]:StockCarController+QualificationPhase.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[GameViewController touchesBegan:withEvent:]:GameViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[gameControl phase] ">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[StockCarPlayer OverTakeDriver:]:StockCarPlayer.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[StockCarController(TrackPhase) ProcessTrackCards:]:StockCarController+TrackPhase.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[GameViewController viewDidLoad]:GameViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[StockCarPlayer(QualiPhase) StartQualificationPhase]:StockCarPlayer+QualiPhase.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[StockCarController(ActionPhase) HandleActionPlayWithCard:]:StockCarController+ActionPhase.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[TrackCard initWithRef:Laps:Event:Flag:Texture:]:TrackDefs.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "(SKNode*)self">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[GameViewController UpdateLeadDraftDisplay]:GameViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[GameScene sceneDidLoad]:GameScene.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "(SKScene *)self">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[StockCarPlayer(StockCarPlayerWithAI) RespondToAction:]:StockCarPlayer+AI.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[StockCarController(TrackPhase) CrashOnTrack:]:StockCarController+TrackPhase.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[StockCarController init]:StockCarController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[GameViewController DisplayNonPlayerDiscardsForPlayer:Cards:]:GameViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[StockCarPlayer DrawSingleCard]:StockCarPlayer.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[GameViewController PlaceCardsInDriverDiscard:]:GameViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[StockCarController(TrackPhase) DNFCheckPlayers]:StockCarController+TrackPhase.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[StockCarPlayer ButtonPressedWithCards:]:StockCarPlayer.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[Track TrackPhaseDraw]:Track.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[StockCarController(QualificationPhase) PlayerSubmitsQualCard]:StockCarController+QualificationPhase.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[StockCarPlayer YellowFlagChecks:]:StockCarPlayer.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[StockCarController TrackInUse:]:StockCarController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[StockCarPlayer(TrackPhase) ProcessLapCard:]:StockCarPlayer+TrackPhase.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[GameViewController InsertEvent:]:GameViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[StockCarController(TrackPhase) FinishTrackPhaseWithCards:]:StockCarController+TrackPhase.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[StockCarController(TrackPhase) AddSlowTraffic:]:StockCarController+TrackPhase.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[StockCarPlayer UpdatePlayDisplay]:StockCarPlayer.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[StockCarController LowestQTimeTurnover]:StockCarController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[StockCarController(QualificationPhase) GridOrder]:StockCarController+QualificationPhase.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[StockCarController NextPlayer]:StockCarController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[StockCarController SetPlayerRules]:StockCarController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[StockCarPlayer(QualiPhase) FinishQualificationPhaseWithCard:]:StockCarPlayer+QualiPhase.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[StockCarController GetNextTrackCard]:StockCarController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[GameViewController StartButton_pressed:]:GameViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "(SKNode *)card">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[Track TurnOverTrackCard]:Track.m">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
