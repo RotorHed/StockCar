@@ -44,6 +44,10 @@
             break;
     }
     
+    // THIS IS A BIG DEBUG LINE - ALL PLAYERS HUMAN!!!
+    _Kind = HUMAN;
+    // AND THATS IT
+
     _Number = p;
     _LeadDraftPosition = 0;
     _InPit = NO;
