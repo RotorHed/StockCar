@@ -33,7 +33,6 @@
 -(void) DisplayHandOfPlayer:(NSMutableArray*)hand;
 
 -(void) DisplayNonPlayerDiscardsForPlayer:(StockCarPlayer*)p Cards:(NSMutableArray*)crds;
-//-(void) DisplayNonPlayerDiscardForPlayer:(int)p Card:(DriverCard*)crd;
 
 -(void) ShowQualificationPrompt:(bool)show;
 -(void) ShowRespondPrompt:(bool)show Text:(NSString*)str;
