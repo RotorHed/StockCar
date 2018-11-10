@@ -18,20 +18,18 @@
     // Move to Quali Phase
     [self SetPhaseForAllPlayersTo:QUALI];
     [self.gViewCont AddToScene:self.pitBoard];
-    
+    self.actionPlayer = self.players.firstObject;
 
-    for(StockCarPlayer *p in self.players) {
-        [self.pitBoard playerNumber:p.Number];
-        [self.pitBoard lapsRemain:300];
-        [p StartQualificationPhase]; //Players will draw + sort cards
-    }
+    [self.pitBoard playerNumber:self.actionPlayer.Number];
+    [self.pitBoard lapsRemain:300];
+    [self.actionPlayer StartQualificationPhase];
+
+
+    // The follwing places the track deck on the table - this doesnt seem like the right place to do that....
     [self.gViewCont PlaceTrackDeck];
     [self.gViewCont UpdateTrackDeckRemaining:(int)[self.TrackArea DrawPile].count];
     
-    //[self.gViewCont PlaceDriverDeck];
-//    [self.gViewCont UpdateDriverDeckRemaining:(int)[self.players[0] drawPile].count];
-    
-    //[self.gViewCont DisplayHandOfPlayer:[self.players[0] PlayerHand]];
+
     [self.gViewCont ShowQualificationPrompt:YES];
     [self.gViewCont AllowMultipleSelectedCards:NO];
     [self.gViewCont HideConfirmationBtn:NO];
@@ -40,14 +38,26 @@
 
 
 -(void) PlayerSubmitsQualCard {
+    
+    // 10 NOV 2018 REFACTOR -  Trying to remove AI/Auto play for now. Need to decide how to show players hands - crash due to not clearing down the cards from the GameViewController node list before disaplying different cards.
+    
     // This function is called by each player object to register the card is played
     // Function will only call the Finish Phase function when all players submitted a card
     
     bool flag = YES; //has everyone played a quali card? Assume yes
     // In order to get the AI to choose cards after the player, the following loop will call AI players for quali cards
     for(StockCarPlayer *p in self.players)
-        if(p.QualificationCardValue==0)
+        if(p.QualificationCardValue==0) {
             flag = NO; //Still wiaitng for someone
+            self.actionPlayer = p;
+            [self.pitBoard playerNumber:self.actionPlayer.Number];
+            [self.pitBoard lapsRemain:300];
+            [self.gViewCont PlaceDriverDeck];
+            [self.gViewCont UpdateDriverDeckRemaining:(int)[self.actionPlayer drawPile].count];
+            [self.gViewCont DisplayHandOfPlayer:[self.actionPlayer PlayerHand]];
+            
+            [self.actionPlayer StartQualificationPhase];
+        }
     
     if(flag) { //everyone played a card
         [self.gViewCont HideConfirmationBtn:YES];

@@ -18,15 +18,13 @@
     [self SortHandByQTime];
     [self RegisterConfirmSelector:@selector(FinishQualificationPhaseWithCard:)];
     
-    if(self.Kind == HUMAN) {
-        [self.GameTable PlaceDriverDeck];
-        [self.GameTable UpdateDriverDeckRemaining:(int)self.drawPile.count];
+    [self.GameTable PlaceDriverDeck];
+    [self.GameTable UpdateDriverDeckRemaining:(int)self.drawPile.count];
     
-        [self.GameTable AllowMultipleSelectedCards:NO];
-        [self.GameTable HideConfirmationBtn:NO];
-    }
-    else if(self.Kind == AI)
-            [self PlaySimulation:nil Response:PASS_INSIDE];
+    [self.GameTable AllowMultipleSelectedCards:NO];
+    [self.GameTable HideConfirmationBtn:NO];
+    
+    // Now wait for user card selection - FinishQualificationPhaseWithCard
 }
 
 -(void) FinishQualificationPhaseWithCard:(DriverCard *)c {
