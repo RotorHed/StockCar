@@ -145,7 +145,6 @@ bool SingleCardSelectionOnly;
         [d setPosition:CGPointMake(100 + (offset*100) + DCARD_STD_WIDTH,300-n*20)];
         n++;
         [sceneNode addChild:d];
-       // [otherPlayerDiscards addObject:d];
     }
 }
 
