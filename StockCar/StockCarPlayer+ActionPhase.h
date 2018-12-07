@@ -13,5 +13,6 @@
 -(void) HandleActionSelection:(DriverCard *)c;
 -(void) PassRestOfTurn;
 -(void) MakeActionSelection:(TrackCard *)l Response:(DRIVERCARDACTIONS)a;
+-(void) RespondToPassAttemptWithCard:(DriverCard *)c;
 -(void) Response:(NSMutableArray *)resp;
 @end

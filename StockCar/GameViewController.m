@@ -33,13 +33,14 @@ bool SingleCardSelectionOnly;
 
 
 -(void) UpdateDriverDeckRemaining:(int)count {
-    if(_actionPlayer.Kind != HUMAN)
+    
+    if(gameControl.actionPlayer.Kind != HUMAN)
         return;
     [dCardCount setText:[NSString stringWithFormat:@"%i", count]];
 }
 
 -(void) UpdateTrackDeckRemaining:(int)count {
-    if(_actionPlayer.Kind != HUMAN)
+    if(gameControl.actionPlayer.Kind != HUMAN)
         return;
     [tCardCount setText:[NSString stringWithFormat:@"%i", count]];
 }
@@ -50,7 +51,7 @@ bool SingleCardSelectionOnly;
 
 -(void) PlaceDriverDeck {
 // This stuff is here because it should ordinarily only be called once - as players change, we only need to update the displayed card count
-    if(_actionPlayer.Kind != HUMAN)
+    if(gameControl.actionPlayer.Kind != HUMAN)
         return;
     dCardCount = [[SKLabelNode alloc]initWithFontNamed:SC_DEFAULT_FONT];
     [dCardCount setFontColor:colWht];
@@ -66,7 +67,7 @@ bool SingleCardSelectionOnly;
 
 -(void) PlaceTrackDeck {
     // This stuff is here because it should ordinarily only be called once (per Game)
-    if(_actionPlayer.Kind != HUMAN)
+    if(gameControl.actionPlayer.Kind != HUMAN)
         return;
     NSString *trackType;
     switch([gameControl TrackType]) {
@@ -116,7 +117,7 @@ bool SingleCardSelectionOnly;
 }
 
 -(void) PlaceCardsInDriverDiscard:(NSMutableArray*)toDiscard {
-    if(_actionPlayer.Kind != HUMAN)
+    if(gameControl.actionPlayer.Kind != HUMAN)
         return;
     int n = 0;
     [sceneNode removeChildrenInArray:toDiscard];
@@ -128,7 +129,7 @@ bool SingleCardSelectionOnly;
 }
 
 -(void) PlaceCardInDriverDiscard:(DriverCard*)c {
-    if(_actionPlayer.Kind != HUMAN)
+    if(gameControl.actionPlayer.Kind != HUMAN)
         return;
     
     [c setPosition:CGPointMake(DRIVER_DISCARD_X+20, DRIVER_DISCARD_Y)];
@@ -183,7 +184,7 @@ bool SingleCardSelectionOnly;
     
     SKLabelNode* confButtonTxt = [[SKLabelNode alloc]initWithFontNamed:SC_DEFAULT_FONT];
 
-    NSString *BtnText = [NSString stringWithFormat:@"Confirm..."];
+    NSString *BtnText = [NSString stringWithFormat:@"QUALIFY"];
     [confButtonTxt setText:BtnText];
     [confButtonTxt setFontColor:colWht];
     [confButtonTxt setFontSize:30];
@@ -198,7 +199,7 @@ bool SingleCardSelectionOnly;
     [contButtonTxt setFontColor:colWht];
     [contButtonTxt setFontSize:30];
     [contBtn addChild:contButtonTxt];
-    [contBtn setHidden:NO];
+    [contBtn setHidden:YES];
 
     
     SingleCardSelectionOnly = YES;
@@ -209,13 +210,16 @@ bool SingleCardSelectionOnly;
     
     // Get the SKScene from the loaded GKScene
     sceneNode = (GameScene *)scene.rootNode;
+    
 
     // Copy gameplay related content over to the scene
     sceneNode.entities = [scene.entities mutableCopy];
     sceneNode.graphs = [scene.graphs mutableCopy];
+
     
     // Set the scale mode to scale to fit the window
     sceneNode.scaleMode = SKSceneScaleModeAspectFill;
+
     
     skView = (SKView *)self.view;
     
@@ -318,25 +322,37 @@ bool SingleCardSelectionOnly;
             CGPoint p = [t locationInNode:sceneNode];
             SKNode *n = [sceneNode nodeAtPoint:p];
             if(n==contBtn)
-                [_actionPlayer Continue];
+                [gameControl.actionPlayer Continue];
             if(n == confBtn && ![confBtn isHidden]) {
                 // Confirm Button is shown and user pressed it - find which card is selected and call suitable routing
-                for (SKNode *h in _actionPlayer.hand) {
+                for (SKNode *h in gameControl.actionPlayer.hand) {
                     if(h.position.y > DRIVER_DECK_Y) //is this one selected?
                         [selectedCards addObject:h];
                 }
                 //if(selectedCards.count)
-                    [_actionPlayer Confirm:selectedCards];
+                    [gameControl.actionPlayer Confirm:selectedCards];
                 return;
             }
-            if ([_actionPlayer.hand containsObject:n]){
+            if ([gameControl.actionPlayer.hand containsObject:n]){
                 if(n.position.y > DRIVER_DECK_Y) { //Check if already selected, and put down
                     [n setPosition:CGPointMake(n.position.x, n.position.y - 50)];
+                    switch(gameControl.phase)
+                    {
+                        case TRACK:
+                            [self SetConfirmBtnText:@"DNF"];
+                            break;
+                        case ACTION:
+                            [self SetContinueBtnText:@"NEXT DRIVER"];
+                            break;
+                    }
                     return;
                 }
-                for(SKNode *h in _actionPlayer.hand) {
+                for(SKNode *h in gameControl.actionPlayer.hand) {
                     if(h == n)
+                    {
                         [n setPosition:CGPointMake(n.position.x, n.position.y + 50)];
+                        [self SetConfirmBtnText:@"Confirm..."];
+                    }
                     else
                         if(SingleCardSelectionOnly)
                             [h setPosition:CGPointMake(h.position.x, DRIVER_DECK_Y)];
@@ -346,13 +362,7 @@ bool SingleCardSelectionOnly;
     }
 }
 
--(void) HideConfirmationBtn:(bool)t {
-    [confBtn setHidden:t];
-}
 
--(void) HideContinueBtn:(bool)t {
-    [contBtn setHidden:t];
-}
 
 -(void) UpdateLeadDraftDisplay {
     NSSortDescriptor *LDPos = [[NSSortDescriptor alloc]initWithKey:@"LeadDraftPosition" ascending:YES];
@@ -372,20 +382,23 @@ bool SingleCardSelectionOnly;
     }
 }
 
+- (void) ClearPlayerHandFromTableWithHand:(NSMutableArray *)hand andDiscards:(NSMutableArray *)discards
+{
+    [sceneNode enumerateChildNodesWithName:@"DRIVERDECKCARD" usingBlock:^(SKNode *n, bool *s)
+     {
+         [n removeFromParent];
+     }];
+}
 
 -(void) DisplayHandOfPlayer:(NSMutableArray*)hand {
-//    if(!displayedHand)
-//        displayedHand = [[NSMutableArray alloc]init];
-//    else
-//        [sceneNode removeChildrenInArray:displayedHand];
-    [sceneNode removeChildrenInArray:hand];
+
     int n = 0;
+    [sceneNode removeChildrenInArray:hand];
     for(DriverCard* c in hand) {
         float xPos = DRIVER_HAND_SPACING;
         xPos *= (float)n + 1;
         xPos += DRIVER_DECK_X;
         n++;
-        [displayedHand addObject:c];
         [sceneNode addChild:c];
         SKAction *m = [SKAction moveTo:CGPointMake(xPos, DRIVER_DECK_Y) duration:2.0f];
         [c runAction:m];
@@ -411,14 +424,38 @@ bool SingleCardSelectionOnly;
     [sceneNode addChild:node];
 }
 
+-(void) SetConfirmBtnText:(NSString *)txt
+{
+    [confBtn removeAllChildren];
+    SKLabelNode* confButtonTxt = [[SKLabelNode alloc]initWithFontNamed:SC_DEFAULT_FONT];
+    
+    NSString *BtnText = [NSString stringWithFormat:txt];
+    [confButtonTxt setText:BtnText];
+    [confButtonTxt setFontColor:colWht];
+    [confButtonTxt setFontSize:30];
+    [confBtn addChild:confButtonTxt];
+    [confBtn setHidden:NO];
+}
 
+-(void) SetContinueBtnText:(NSString *)txt
+{
+    [contBtn removeAllChildren];
+    SKLabelNode *contButtonTxt =[[SKLabelNode alloc]initWithFontNamed:SC_DEFAULT_FONT];
+    
+    NSString *BtnText = [NSString stringWithFormat:txt];
+    
+    [contButtonTxt setText:BtnText];
+    [contButtonTxt setFontColor:colWht];
+    [contButtonTxt setFontSize:30];
+    [contBtn addChild:contButtonTxt];
+    [contBtn setHidden:NO];
+}
 
+-(void) HideConfirmationBtn:(bool)t {
+    [confBtn setHidden:t];
+}
 
-
-
-
-
-
-
-
+-(void) HideContinueBtn:(bool)t {
+    [contBtn setHidden:t];
+}
 @end

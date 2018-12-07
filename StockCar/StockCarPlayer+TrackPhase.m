@@ -17,41 +17,56 @@
     self.actionsTakenThisRound = NO;
     self.playedLapCards = NO;
     [self RegisterConfirmSelector:@selector(SelectedLapCards:)];
+    [self.GameTable HideConfirmationBtn:NO];
+    [self.GameTable HideContinueBtn:YES];
     
     if (self.Kind==HUMAN)
         [self SortHandByLaps];
-    // check if crash ahead
-    //AI players respond
+    [self.GameTable SetConfirmBtnText:@"DNF..."];
     //Human players wait for buttons.
 }
 
 -(void) SelectedLapCards:(NSMutableArray *)selection {
     TrackCard *topTrack = [[self.Controller.TrackArea trackPhasePile]lastObject];
+    
     switch (topTrack.flag) {
         case YELLOW:
             if([self YellowFlagChecks:selection])
                 [self setPlayedLapCards:YES];
             else
+            {
                 [self.Controller DNF_ForPlayer:self];
+                return; // PLAYER DNF - Probably display a prompt and button press
+            }
         break;
-    case GREEN:
-        if ([self TrackPhaseRuleCheck:selection]) {
-            [self setActionsTakenThisRound:(int)selection.count];
-            [self CardsDiscarded:selection];
-            [self setPlayedLapCards:YES];
-        }
+        case GREEN:
+            if ([self TrackPhaseRuleCheck:selection])
+            {
+                [self CardsDiscarded:selection];
+                [self setPlayedLapCards:YES];
+            }
             else
-                return;
+            {
+                [self.Controller DNF_ForPlayer:self];
+                return;// PLAYER DNF - Probably display a prompt and button press
+            }
     }
-    [self.Controller PlayerSubmittedLapCards];
+    // Next line moved to TrackPhaseRuleCheck for DRAFT card special case
+    // [self setActionsTakenThisRound:(int)selection.count];
     if(self.Kind == HUMAN) {
         [self.GameTable HideConfirmationBtn:YES];
         [self.GameTable HideContinueBtn:NO];
         [self.GameTable ShowRespondPrompt:NO Text:@" "];
+        
     }
+    [self ClearCardsFromTable];
+    [self.Controller PlayerSubmittedLapCards];
+
 }
 
 -(void) ProcessLapCard:(TrackCard*)crd {
+    
+    [self UpdatePlayDisplay];
     if(self.Kind == AI)
         [self PlaySimulation:crd Response:PASS_INSIDE];
     else
@@ -59,15 +74,16 @@
             NSString *prompt;
             if (crd.event == CRASH) {
                 self.CrashAhead = YES;
+                [self.GameTable AllowMultipleSelectedCards:NO];
                 prompt = @"CRASH AHEAD! Play any PASS or INSIDE ADVANTAGE card";
             }
             else {
                 self.CrashAhead = NO;
+                [self.GameTable AllowMultipleSelectedCards:YES];
                 prompt = @"Play cards to meet Lap requirement or single Draft card";
             }
                 [[self GameTable]ShowRespondPrompt:YES Text:prompt];
         }
-        return;
 }
 
 -(bool) YellowFlagChecks:(NSMutableArray *)playerCards {
@@ -90,9 +106,14 @@
     int targetLaps = (int)[self.Controller.TrackArea LapsRequiredInCurrentPhase];
     int lapsPlayed = 0, n = 0;
     //Check for Draft card special case
-    if(selectedCards.count == 1) {
+    if(selectedCards.count == 1 && [[selectedCards firstObject]lapsCompleted] < targetLaps)
+    { // First if player uses draft card with equal or more laps - its not counted as draft
         if([[selectedCards firstObject] Action] == DRAFT)
+        {
+            //DRAFT CARD SPECIAL CASE _ PLAYER LOSES ACTION PHASE
+            [self setActionsTakenThisRound:[self MaxActions]];
             return YES;
+        }
     }
     for (DriverCard *c in selectedCards) {
         lapsPlayed += [c lapsCompleted];
@@ -106,6 +127,7 @@
     
     if(lapsPlayed < targetLaps)
         return NO;
+    [self setActionsTakenThisRound:(int)selectedCards.count];
     return YES;
 }
 @end

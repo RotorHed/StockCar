@@ -10,14 +10,17 @@
 #import "StockCarController+TrackPhase.h"
 
 @implementation StockCarController (RefillPhase)
+
 -(void) StartRefillPhase {
     [self setPhase:REFILL];
     for (StockCarPlayer *p in [self players])
+    {
         [p refillHand];
-    [self.TrackArea DiscardTrackPhaseCards];
-    
-    for (StockCarPlayer *p in self.players)
         [p RegisterContinueSelector:@selector(StartTrackPhase)];
+        [p ClearCardsFromTable];
+    }
+    [self.gViewCont ShowRespondPrompt:NO Text:@" "];
+    [self.TrackArea DiscardTrackPhaseCards];
 }
 
 -(void) FinishRefillPhase {

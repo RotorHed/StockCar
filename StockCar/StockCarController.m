@@ -22,7 +22,7 @@
     _pitBoard = [[Pitboard alloc]init];
     _phase = SETUP;
     _YellowFlag = NO;
-    return self;
+    return [super init];
 }
 
 - (StockCarController*) initWithGameViewController:(GameViewController*)g {
@@ -48,8 +48,8 @@
     // ONLY ONE HUMAN PLAYER SUPPORTED.... CHANGE
     // Use mulitple scenes or views or something for different players?
     [_players addObject:[[StockCarPlayer alloc]initWithPlayer:p andTable:self.gViewCont andController:self]];
-    if(p==0)
-        [_gViewCont setActionPlayer:_players[p]];
+
+    _actionPlayer = [_players firstObject]; // Initialise actionplayer
 }
 
 -(void) SetPlayerRules {
@@ -132,37 +132,17 @@
     [ord sortUsingDescriptors:@[QualSort]];
     int lowestQTime = [[ord firstObject]QualiTime];
     NSMutableArray *playersTemp = [[NSMutableArray alloc]init];
-    [playersTemp addObjectsFromArray:_players];
+    [playersTemp addObjectsFromArray:self.players];
     
     for(StockCarPlayer *p in playersTemp)
     {
         if([p TopDiscardQTime]==lowestQTime)
             return p;
     }
-
     return [playersTemp firstObject];
 }
 
--(StockCarPlayer*)NextPlayer {
-    
-    NSMutableArray *lst = [[NSMutableArray alloc]init];
-    for(StockCarPlayer* p in self.players)
-        if([p actionRoundComplete] == NO)
-            [lst addObject:p];
-    
-    if(lst.count == 0)
-        return nil;
-    
-    int HighestQTime = 0;
-    StockCarPlayer *nextPlayer = [lst firstObject];
-    for(StockCarPlayer *p in lst)
-        if([p TopDiscardQTime] > HighestQTime) {
-            HighestQTime = [p TopDiscardQTime];
-            nextPlayer = p;
-        }
-    // probably should consdier ties in this search
-    return nextPlayer;
-}
+
 
 -(void) SetPhaseForAllPlayersTo:(GAME_PHASE)ph {
     self.phase = ph;

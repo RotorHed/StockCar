@@ -38,7 +38,7 @@
 -(void) PlayerInteractionWithSelectedCard:(DriverCard*)selection;
 -(void) DNF_ForPlayer:(StockCarPlayer*)p;
 -(StockCarPlayer*) LowestQTimeTurnover;
--(StockCarPlayer*)NextPlayer;
+//-(StockCarPlayer*)NextPlayer;
 -(void) SetPhaseForAllPlayersTo:(GAME_PHASE)ph;
 @end
 

@@ -6,6 +6,7 @@
 //  Copyright © 2017 Alan Jenkins. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import "StockCarController+QualificationPhase.h"
 #import "StockCarController.h"
 #import "StockCarController+TrackPhase.h"
@@ -13,27 +14,26 @@
 #import "StockCarPlayer+QualiPhase.h"
 
 @implementation StockCarController (QualificationPhase)
+NSMutableArray *QualiPhasePlayQ;
 
 - (void) StartQualificationPhase {
     // Move to Quali Phase
     [self SetPhaseForAllPlayersTo:QUALI];
     [self.gViewCont AddToScene:self.pitBoard];
-    self.actionPlayer = self.players.firstObject;
-
-    [self.pitBoard playerNumber:self.actionPlayer.Number];
+    [self.gViewCont PlaceDriverDeck];
+    
+    QualiPhasePlayQ = [[NSMutableArray alloc]initWithArray:self.players];
+    self.actionPlayer = QualiPhasePlayQ.firstObject;
+    [QualiPhasePlayQ removeObject:self.actionPlayer];
+    
+    [self.pitBoard playerNumber:self.actionPlayer.Number+1];
     [self.pitBoard lapsRemain:300];
     [self.actionPlayer StartQualificationPhase];
 
 
-    // The follwing places the track deck on the table - this doesnt seem like the right place to do that....
-    [self.gViewCont PlaceTrackDeck];
-    [self.gViewCont UpdateTrackDeckRemaining:(int)[self.TrackArea DrawPile].count];
-    
-
     [self.gViewCont ShowQualificationPrompt:YES];
     [self.gViewCont AllowMultipleSelectedCards:NO];
     [self.gViewCont HideConfirmationBtn:NO];
-
 }
 
 
@@ -43,23 +43,18 @@
     
     // This function is called by each player object to register the card is played
     // Function will only call the Finish Phase function when all players submitted a card
-    
-    bool flag = YES; //has everyone played a quali card? Assume yes
-    // In order to get the AI to choose cards after the player, the following loop will call AI players for quali cards
-    for(StockCarPlayer *p in self.players)
-        if(p.QualificationCardValue==0) {
-            flag = NO; //Still wiaitng for someone
-            self.actionPlayer = p;
-            [self.pitBoard playerNumber:self.actionPlayer.Number];
-            [self.pitBoard lapsRemain:300];
-            [self.gViewCont PlaceDriverDeck];
-            [self.gViewCont UpdateDriverDeckRemaining:(int)[self.actionPlayer drawPile].count];
-            [self.gViewCont DisplayHandOfPlayer:[self.actionPlayer PlayerHand]];
-            
-            [self.actionPlayer StartQualificationPhase];
+
+    if([QualiPhasePlayQ count] != 0) // Will be zero when everyone has submitted Quali card
+    {
+        self.actionPlayer = [QualiPhasePlayQ firstObject];
+        [QualiPhasePlayQ removeObject:self.actionPlayer];
+        [self.pitBoard playerNumber:(self.actionPlayer.Number+1)];
+
+
+        [self.actionPlayer StartQualificationPhase];
         }
-    
-    if(flag) { //everyone played a card
+    else
+    { //everyone played a card
         [self.gViewCont HideConfirmationBtn:YES];
         [self FinishQualificationPhase];
     }
@@ -72,10 +67,12 @@
     [self.gViewCont ShowQualificationPrompt:NO];
     
     for (StockCarPlayer *p in self.players) {
-        if(p.Kind == AI)
+//        if(p.Kind == AI)
             [p HideTopDiscard:NO];
         [p RegisterContinueSelector:@selector(StartTrackPhase)];
     }
+    [self.gViewCont PlaceTrackDeck];
+    [self.gViewCont HideContinueBtn:NO];
 }
 
 -(void) GridOrder {
@@ -99,8 +96,7 @@
     
     for(StockCarPlayer *p in self.players)
         [p setLeadDraftPosition:(int)[self.players indexOfObject:p]+1];
-    
-    [self setActionPlayer:[self NextPlayer]];
+
     [self.gViewCont UpdateLeadDraftDisplay];
 }
 @end

@@ -33,6 +33,7 @@ typedef struct {
 -(void) DiscardTrackPhaseCards;
 -(SKSpriteNode*) TurnOverTrackCard;
 -(int) LapsRequiredInCurrentPhase;
+-(int) FullRaceLapsRequirement;
 @end
 
 #endif /* Track_h */

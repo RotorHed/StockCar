@@ -15,29 +15,19 @@
 @implementation StockCarPlayer (ActionPhase)
 
 -(void) StartPlayerActionPhase {
-    if(self.Kind == HUMAN) {
-        [self SortHandByType];
-    }
+    [self SortHandByType];
+    [self.GameTable AllowMultipleSelectedCards:NO];
+    [self RegisterConfirmSelector:@selector(HandleActionSelection:)];
+    [self.GameTable HideConfirmationBtn:NO];
+    [self UpdatePlayDisplay];
 }
-
-//-(void) TakeAction {
-//    if(self.Kind != HUMAN) {
-//        if([self actionRoundComplete])
-//            [self.Controller ActionPhaseDoneBy:self];
-//        else
-//            [self PlaySimulation:0 Response:PASS_INSIDE];
-//    }
-//    else if (self.Kind == HUMAN)
-//        [self.GameTable HideConfirmationBtn:NO];
-//}
-
 
 -(void) PassRestOfTurn {
     [self setPhase:WAITING];
+    [self setActionRoundComplete:YES];
     [self.GameTable HideConfirmationBtn:YES];
     [self.GameTable HideContinueBtn:NO];
-    
-    [self.Controller ActionPhaseDoneBy:self];
+    [self ClearCardsFromTable];
 }
 
 -(void) MakeActionSelection:(TrackCard *)l Response:(DRIVERCARDACTIONS)a {
@@ -79,10 +69,21 @@
     // Ensure buttons are registered as required
 }
 
+-(bool) ActionsRemaining
+{
+    if(self.actionsTakenThisRound >= self.MaxActions) {
+        [self.GameTable HideConfirmationBtn:YES];
+        [self setActionRoundComplete:YES];
+        [self RegisterConfirmSelector:@selector(PassRestOfTurn)];
+        [self.GameTable ShowRespondPrompt:YES Text:@"Actions Complete - Confirm to continue..."];
+        return false;
+    }
+    return true;
+}
 
 -(void) HandleActionSelection:(DriverCard *)c {
     
-    if(c == nil) // No card - turn passed
+    if(c == nil || ![self ActionsRemaining]) // No card or no actions left - turn passes
     {
         [self PassRestOfTurn];
         return;
@@ -141,11 +142,11 @@
         case PASS_OUTSIDE: // Only card that Avoids 2 wide
             if(temp == nil || temp.Kind == GAP)
                 return;
-            [self CardDiscarded:c];
             self.actionsTakenThisRound++;
-            [self UpdatePlayDisplay];
+            [self CardDiscarded:c];
+            [self ClearCardsFromTable];
             [[self Controller]AttemptOverTake:self withCard:c];
-            break;
+            return; //Wait for response now
         // These 3 players as action have are not legal - just return
         case BLOCK:
         case CHALLENGE:
@@ -153,21 +154,25 @@
             return;
     }
     
-    if(self.actionsTakenThisRound >= self.MaxActions) {
-        [self.GameTable HideConfirmationBtn:YES];
-        [self setActionRoundComplete:YES];
-        [self RegisterConfirmSelector:@selector(PassRestOfTurn)];
-        [self.GameTable ShowRespondPrompt:YES Text:@"Actions Complete - Confirm to continue..."];
-    }
+    if ([self ActionsRemaining])
+        [self UpdatePlayDisplay];
 }
 
--(void) RespondToPass {
+DriverCard *passCard;
+
+-(void) RespondToPassAttemptWithCard:(DriverCard *)c
+{
+    passCard = c; //this is just to store it for a rule check later
     [self RegisterConfirmSelector:@selector(Response:)];
     self.phase = RESPOND; //Wait for Human input....
     if (self.Kind == AI)
         [self PlaySimulation:nil Response:PASS_INSIDE];
     else if(self.Kind == HUMAN) {
-        [self.GameTable ShowRespondPrompt:YES Text:@"Block or Challenge Pass attempt"];
+        if(c.Action == INSIDE_ADVANTAGE)
+            [self.GameTable ShowRespondPrompt:YES Text:@"Challenge Pass attempt"];
+        else
+            [self.GameTable ShowRespondPrompt:YES Text:@"Block or Challenge Pass attempt"];
+        [self UpdatePlayDisplay];
         [self.GameTable HideContinueBtn:YES];
         [self.GameTable HideConfirmationBtn:NO];
     }
@@ -175,7 +180,21 @@
 
 
 -(void) Response:(DriverCard *)resp {
+    if(resp != nil)
+    {
+        if(resp.Type == ACTION_ONLY)
+        {
+            [self.GameTable ShowRespondPrompt:NO Text:@" "];
+            [self.GameTable ShowRespondPrompt:YES Text:@" Must play Response card, or no card to allow pass..."];
+            return;
+        }
+        if(passCard.Action == INSIDE_ADVANTAGE)
+            if(resp.Action != CHALLENGE)
+                return;
+    }
+    [self.GameTable ShowRespondPrompt:NO Text:@" "];
     [self CardDiscarded:resp];
+    [self ClearCardsFromTable];
     [self.Controller ResponseToOvertake:self WithCard:resp];
 }
 @end

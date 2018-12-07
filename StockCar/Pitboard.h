@@ -22,6 +22,7 @@
 @property (atomic) SKLabelNode *letterN1;
 @property (atomic) SKLabelNode *letterN2;
 @property (atomic) SKLabelNode *genText;
+@property (atomic, readonly) int lapsRemaining;
 
 -(void) playerNumber:(int)num;
 -(void) lapsRemain:(int)laps;

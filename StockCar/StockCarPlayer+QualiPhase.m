@@ -17,9 +17,12 @@
     [self FillHand];
     [self SortHandByQTime];
     [self RegisterConfirmSelector:@selector(FinishQualificationPhaseWithCard:)];
-    
-    [self.GameTable PlaceDriverDeck];
-    [self.GameTable UpdateDriverDeckRemaining:(int)self.drawPile.count];
+    self.dash = [[Dashboard alloc]init];
+    [self.dash SetHandCount:(int)self.hand.count Of:self.MaxHandSize];
+    [self.dash SetActionUsed:0 Of:self.MaxActions];
+    [self.dash SetRefillCount:self.RefillMax];
+    [self.GameTable AddToScene:(SKSpriteNode*)self.dash];
+    [self UpdatePlayDisplay];
     
     [self.GameTable AllowMultipleSelectedCards:NO];
     [self.GameTable HideConfirmationBtn:NO];
@@ -33,7 +36,7 @@
     [self setQualificationCardValue:c.QualiTime];
     [self CardDiscarded:c];
     [self DrawSingleCard]; // replace the quali card
-    
+    [self ClearCardsFromTable];
     [self.Controller PlayerSubmitsQualCard];
 }
 @end

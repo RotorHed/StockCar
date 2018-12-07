@@ -155,6 +155,7 @@
     self.lapsCompleted = l;
     self.QualiTime = s;
     self.PitStopTime = pit;
+    self.name = @"DRIVERDECKCARD";
     }
     return self;
 }

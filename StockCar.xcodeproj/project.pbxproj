@@ -20,6 +20,7 @@
 		E74B1F2A1F91F923001BB376 /* StockCarPlayer+ActionPhase.m in Sources */ = {isa = PBXBuildFile; fileRef = E74B1F291F91F923001BB376 /* StockCarPlayer+ActionPhase.m */; };
 		E74B1F2C1F93689D001BB376 /* PitBoard.png in Resources */ = {isa = PBXBuildFile; fileRef = E74B1F2B1F93689C001BB376 /* PitBoard.png */; };
 		E74B1F2E1F938FDF001BB376 /* Pitboard.m in Sources */ = {isa = PBXBuildFile; fileRef = E74B1F2D1F938FDF001BB376 /* Pitboard.m */; };
+		E7A8B67121B257D700905584 /* GameTable.m in Sources */ = {isa = PBXBuildFile; fileRef = E7A8B67021B257D700905584 /* GameTable.m */; };
 		E7BB1BEB1F7A474F0094F0DC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BB1BEA1F7A474F0094F0DC /* AppDelegate.m */; };
 		E7BB1BED1F7A474F0094F0DC /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E7BB1BEC1F7A474F0094F0DC /* GameScene.sks */; };
 		E7BB1BEF1F7A474F0094F0DC /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = E7BB1BEE1F7A474F0094F0DC /* Actions.sks */; };
@@ -95,6 +96,10 @@
 		E74B1F2B1F93689C001BB376 /* PitBoard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PitBoard.png; sourceTree = "<group>"; };
 		E74B1F2D1F938FDF001BB376 /* Pitboard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Pitboard.m; sourceTree = "<group>"; };
 		E74B1F2F1F938FF5001BB376 /* Pitboard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pitboard.h; sourceTree = "<group>"; };
+		E7A8B66F21B2565A00905584 /* GameTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameTable.h; sourceTree = "<group>"; };
+		E7A8B67021B257D700905584 /* GameTable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameTable.m; sourceTree = "<group>"; };
+		E7A8B67221B2588800905584 /* GameTableCommunal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameTableCommunal.h; sourceTree = "<group>"; };
+		E7A8B67321B2599F00905584 /* GameTablePlayerArea.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameTablePlayerArea.h; sourceTree = "<group>"; };
 		E7BB1BE61F7A474F0094F0DC /* StockCar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StockCar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7BB1BE91F7A474F0094F0DC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E7BB1BEA1F7A474F0094F0DC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -198,6 +203,10 @@
 				E7BB1BEE1F7A474F0094F0DC /* Actions.sks */,
 				E7BB1BF01F7A474F0094F0DC /* GameScene.h */,
 				E7BB1BF11F7A474F0094F0DC /* GameScene.m */,
+				E7A8B66F21B2565A00905584 /* GameTable.h */,
+				E7A8B67021B257D700905584 /* GameTable.m */,
+				E7A8B67321B2599F00905584 /* GameTablePlayerArea.h */,
+				E7A8B67221B2588800905584 /* GameTableCommunal.h */,
 				E7BB1BF31F7A474F0094F0DC /* GameViewController.h */,
 				E7BB1BF41F7A474F0094F0DC /* GameViewController.m */,
 				E7BB1BF61F7A474F0094F0DC /* Main.storyboard */,
@@ -453,6 +462,7 @@
 				E74B1F2A1F91F923001BB376 /* StockCarPlayer+ActionPhase.m in Sources */,
 				E72D5FB01F8A7C9900D0C3CA /* StockCarController+ActionPhase.m in Sources */,
 				E7BB1C271F7A80B40094F0DC /* Track.m in Sources */,
+				E7A8B67121B257D700905584 /* GameTable.m in Sources */,
 				E7BB1C231F7A4A370094F0DC /* TrackDefs.m in Sources */,
 				E7BB1BEB1F7A474F0094F0DC /* AppDelegate.m in Sources */,
 				E72D5FAA1F8A711900D0C3CA /* StockCarController+QualificationPhase.m in Sources */,

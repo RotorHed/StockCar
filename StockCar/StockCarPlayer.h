@@ -109,6 +109,7 @@ typedef enum {
 -(void) Continue;
 -(void) RegisterConfirmSelector:(SEL)sel;
 -(void) Confirm:(NSMutableArray *)data;
+-(void) ClearCardsFromTable;
 //-(NSMutableArray*) PlaySimulation:(GAME_PHASE)phase Laps:(int)l Response:(DRIVERCARDACTIONS)a;
 @end
 #endif /* StockCarPlayer_h */

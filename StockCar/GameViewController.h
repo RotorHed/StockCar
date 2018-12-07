@@ -12,17 +12,24 @@
 #import "DriverDeckDefs.h"
 #import "TrackDefs.h"
 
+typedef struct  {
+    NSMutableArray *DisplayedHand;
+    NSMutableArray *Discards;
+} PLAYERSPECIFICITEMS;
+
 @class StockCarPlayer;
 
 @interface GameViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIButton *StartButton;
 @property (weak, nonatomic) IBOutlet SKView *MainMenuView;
 @property (atomic) NSMutableArray* LeadDraftNodes;
-@property (atomic) StockCarPlayer* actionPlayer;
+//@property (atomic) StockCarPlayer* actionPlayer;
 @property (atomic) SEL confirmationSelector;
+@property (atomic,readonly) PLAYERSPECIFICITEMS CurrentPlayerItems;
 
 -(void) UpdateDriverDeckRemaining:(int)count;
 -(void) UpdateTrackDeckRemaining:(int)count;
+-(void) ClearPlayerHandFromTableWithHand:(NSMutableArray *)hand andDiscards:(NSMutableArray *)discards;
 
 -(void) PlaceTrackDeck;
 -(void) PlaceInTrackDiscard:(NSMutableArray*)theseCards;
@@ -40,7 +47,9 @@
 
 -(void) AllowMultipleSelectedCards:(bool)b;
 -(void) HideConfirmationBtn:(bool)t;
+-(void) SetConfirmBtnText:(NSString *)txt;
 -(void) HideContinueBtn:(bool)t;
+-(void) SetContinueBtnText:(NSString *)txt;
 
 -(void) UpdateLeadDraftDisplay;
 -(void) AddToLeadDraftEvent:(TrackCard*)e;

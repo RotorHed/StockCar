@@ -6,6 +6,7 @@
 //  Copyright © 2017 Alan Jenkins. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import "StockCarController+TrackPhase.h"
 #import "StockCarPlayer+AI.h"
 #import "StockCarController+QualificationPhase.h"
@@ -15,6 +16,8 @@
 #import "StockCarController+RefillPhase.h"
 
 @implementation StockCarController (TrackPhase)
+NSMutableArray *TrackPhasePlayQ, *TrackCardsInPlay;
+
 -(void) StartTrackPhase {
     
     [self SetPhaseForAllPlayersTo:TRACK];
@@ -22,25 +25,26 @@
     if([self raceFinished]) //check whether the race is over
         return; // TODO: Call end of game screen and clean up
 
-    for(StockCarPlayer* p in self.players)
-        [p StartTrackPhase];
+    [self.gViewCont HideConfirmationBtn:NO];
+    [self.gViewCont SetConfirmBtnText:@"DNF"];
+    [self.gViewCont HideContinueBtn:YES];
+    [self.gViewCont AllowMultipleSelectedCards:YES];
     
-    // TO DO : Decide how to deal with track cards - select then call each player to respond?
-    // AI players can be automatic - human must wait for input again
-     [self ProcessTrackCards:[self DrawTrackCards]];
+// Select track cards first
+    // This could be 1 or more depending on event cards
+    TrackCardsInPlay = [[NSMutableArray alloc]initWithArray:[self DrawTrackCards]];
+    
+    // For each track card now in play, cycle through each player to let them respond to the card - event, laps etc
+     [self ProcessTrackCards:TrackCardsInPlay];
 }
 
 -(NSMutableArray*) DrawTrackCards {
-    [self.TrackArea TrackPhaseDraw];
+    [self.TrackArea TrackPhaseDraw]; //Draws until a card is found with lap count
     NSMutableArray *lapCards = [self.TrackArea TrackPhaseCards];
     //[[self.TrackArea TrackPhaseCards]removeAllObjects];
     self.LapsCompleted += (int)[[lapCards lastObject]lapsRequired];
     [self.gViewCont PlaceInTrackDiscard:lapCards];
     [self.gViewCont UpdateTrackDeckRemaining:(int)[self.TrackArea DrawPile].count];
-    
-    [self.gViewCont HideConfirmationBtn:NO];
-    [self.gViewCont HideContinueBtn:YES];
-    [self.gViewCont AllowMultipleSelectedCards:YES];
     return lapCards;
 }
 
@@ -61,14 +65,25 @@
 }
 
 -(void) LoseTraction:(StockCarPlayer*)p {
-    NSMutableArray* leadDraft = [[NSMutableArray alloc]init];
-        NSSortDescriptor *QualSort =  [[NSSortDescriptor alloc]initWithKey:@"LeadDraftPosition" ascending:YES];
-    [leadDraft sortedArrayUsingDescriptors:@[QualSort]];
-    [self.players removeObject:p];
-    [self.players addObject:p]; //just remove and re-add affected player to end of lead draft
-    int n = 1;
-    for(StockCarPlayer *c in self.players) //reorder based on new players order
-        [c setLeadDraftPosition:n++];
+    //This block seems like it does nothing...
+//    NSMutableArray* leadDraft = [[NSMutableArray alloc]init];
+//        NSSortDescriptor *QualSort =  [[NSSortDescriptor /alloc]initWithKey:@"LeadDraftPosition" ascending:YES];
+ //   [leadDraft sortedArrayUsingDescriptors:@[QualSort]];
+    
+    
+    NSSortDescriptor *LeadSort =  [[NSSortDescriptor alloc]initWithKey:@"LeadDraftPosition" ascending:YES];
+    [self.players sortUsingDescriptors:@[LeadSort]];
+    int posModifier = 0;
+    for(StockCarPlayer *n in self.players)
+    {
+        [p setLeadDraftPosition:(n.LeadDraftPosition - posModifier)]; //No change until finding the affected player
+        if(n == p)
+        {
+            [p setLeadDraftPosition:(int)[self.players count]];
+            posModifier = 1;
+        }
+    }
+    [self.players sortUsingDescriptors:@[LeadSort]];
 }
 
 -(void) AddSlowTraffic:(TrackCard*)E {
@@ -78,7 +93,7 @@
     [slowT setLeadDraftPosition:1];
     [slowT setKind:SLOW_CAR];
     //[slowT setZRotation:M_PI+M_PI/2];
-    //[slowT scaleToSize:CGSizeMake(SC_CAR_WIDTH, SC_CAR_HEIGHT)];
+    [slowT scaleToSize:CGSizeMake(SC_CAR_WIDTH, SC_CAR_HEIGHT)];
     for (StockCarPlayer *p in self.players)
         [p setLeadDraftPosition:p.LeadDraftPosition+1];
     [self.players addObject:slowT];
@@ -90,12 +105,19 @@
 -(void) ProcessTrackCards:(NSMutableArray*)cards {
     
     StockCarPlayer* affected_Player;
-    [self setYellowFlag:NO]; // Not sure if this is important anymore ???
+    [self setYellowFlag:NO];
     
     //Following code deals with track effects that potentially affect player's by card draw
     // Lap cards and the yellow flag crash card are handled by the player objects themselves
-    for(TrackCard * c in cards)
-        switch([c event]) {
+    while([[TrackCardsInPlay firstObject]event] != CRASH &&
+          [[TrackCardsInPlay firstObject]event] != NONE  &&
+          [[TrackCardsInPlay firstObject]event] != GROOVE_OUT)
+    {
+        TrackCard * c = [TrackCardsInPlay firstObject];
+        [TrackCardsInPlay removeObject:c];
+        
+        switch([c event])
+        {
             case BRAKES:
                 for (StockCarPlayer* p in self.players)
                 {
@@ -103,8 +125,6 @@
                     if([p DiscardQTimeLessThan:SC_MINTIME])
                         [self DNF_ForPlayer:p];
                 }
-                for(StockCarPlayer *p in self.players)
-                    [p RegisterContinueSelector:@selector(StartRefillPhase)];
                 break;
             case SLOW_TRAFFIC:
                 [self AddSlowTraffic:c];
@@ -134,12 +154,6 @@
                 affected_Player = [self LowestQTimeTurnover];
                 [affected_Player setTde_CarTooTight:YES];
                 break;
-            case CRASH:
-                [self CrashOnTrack:c];
-                [self setLapsCompleted:(int)c.lapsRequired];
-                break;
-            case GROOVE_OUT:
-                [self setGrooveOutside:YES];
                 // Cars behind get to overtake with no card
             case NONE:
                 break;
@@ -148,22 +162,32 @@
             case OVERHEAT:
                 [self DNFCheckPlayers];
                 self.YellowFlag = YES;
-                for(StockCarPlayer *p in self.players)
-                    [p RegisterContinueSelector:@selector(StartRefillPhase)];
-                [self.gViewCont HideContinueBtn:NO];
-                [self.gViewCont HideConfirmationBtn:YES];
                 break;
+        }
     }
     
-    // Following is default Lap card response.
-    //Only Human players first
-    for(StockCarPlayer *p in self.players)
+    // Following are LAP cards - they end the track phase.
+    if(self.YellowFlag) // It was a yellow flag event but not crash
+    {// in this case there is no action phase - players all made the lap count and we start a new track phase
+        [self FinishTrackPhase];
+        return;
+    }
+    
+    if([[TrackCardsInPlay firstObject]event] == GROOVE_OUT)
+        [self setGrooveOutside:YES];
+    
+    if([[TrackCardsInPlay firstObject]event] == CRASH) {
+            [self CrashOnTrack:[TrackCardsInPlay firstObject]];
+        }
+    
+    if(!self.YellowFlag) // Not a transmission, Blown Eng or Overheat
     {
-        if(p.Kind == HUMAN || p.Kind == AI) // avoid other event types acting
-            [p ProcessLapCard:[cards lastObject]];
+        TrackPhasePlayQ = [[NSMutableArray alloc]initWithArray:self.players];
+        for (StockCarPlayer *p in TrackPhasePlayQ)
+            if(p.Kind == SLOW_CAR || p.Kind == SHUNT)
+                [TrackPhasePlayQ removeObject:p];
+        [self PlayerSubmittedLapCards]; //This just kicks off the the player wait for anser loop
     }
-    
-    return;
 }
 
 -(void) CrashOnTrack:(TrackCard*)c {
@@ -178,41 +202,48 @@
     [crashCard setLeadDraftPosition:0];
     [crashCard setKind:SHUNT];
     [[self players]addObject:crashCard];
+    self.YellowFlag = TRUE; // this is also a yellow flag event
 //    [self.gViewCont AddToScene:crashCard];
     [self.gViewCont UpdateLeadDraftDisplay];
     // Each player in lead draft order should play a pass card.
 }
 
 -(void) PlayerSubmittedLapCards {
-    // Called when a player submits cards through UI.
-    // Player object akready checks for rules acceptance
-    // Here we just invoke AI players and either Finish the track phase or
-    // draw more cards if it was a yellow flag
-    // Then get the AI players to choose lap cards.
-    for(StockCarPlayer *p in self.players)
-        if(!p.playedLapCards) // If this happens we just wait until al players done
-            return; // Just stop here until all players have chosen.
-    
-    [self FinishTrackPhase];
+    if ([TrackPhasePlayQ count] != 0)
+    {
+        do {
+        self.actionPlayer = [TrackPhasePlayQ firstObject];
+        [TrackPhasePlayQ removeObject:self.actionPlayer];
+        } while (self.actionPlayer.Kind != HUMAN &&
+                 self.actionPlayer.Kind != AI);
+        
+        [self.pitBoard playerNumber:(self.actionPlayer.Number+1)];
+        [self.actionPlayer StartTrackPhase];
+        [self.actionPlayer ProcessLapCard:[TrackCardsInPlay firstObject]];
+    }
+    else
+        [self FinishTrackPhase];
 }
 
--(void) AISubmitsLapCards {
-
-}
 
 -(void) FinishTrackPhase {
     [self.gViewCont ShowRespondPrompt:NO Text:@" "];
     
-    if([[[self.TrackArea DiscardPile]lastObject]flag] == YELLOW)
+    if(self.YellowFlag)
+    {
+        [self.gViewCont SetContinueBtnText:@"YELLOW FLAG!"];
         for(StockCarPlayer *p in self.players)
             [p RegisterContinueSelector:@selector(StartRefillPhase)];
+    }
     else
         for(StockCarPlayer *p in self.players)
             [p RegisterContinueSelector:@selector(StartActionPhase)];
     
     [self.gViewCont HideContinueBtn:NO];
     [self.gViewCont HideConfirmationBtn:YES];
-    [self.pitBoard lapsRemain:self.LapsCompleted];
+
+    [self.pitBoard lapsRemain:[self.TrackArea FullRaceLapsRequirement] -
+      self.LapsCompleted];
 }
 
 
@@ -220,8 +251,4 @@
     // TODO - Complete the proper rac length checks for each track type
     return self.LapsCompleted >= 150; //Short track min limit/2
 }
-
-
-
-
 @end

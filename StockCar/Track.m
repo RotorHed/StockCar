@@ -103,4 +103,10 @@
 -(int) LapsRequiredInCurrentPhase {
     return (int)[[_trackPhasePile lastObject]lapsRequired];
 }
+
+-(int) FullRaceLapsRequirement
+{
+    return self.ShortTrack->FullRaceLapsMin;
+}
+
 @end

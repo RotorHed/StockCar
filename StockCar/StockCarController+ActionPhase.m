@@ -6,6 +6,7 @@
 //  Copyright © 2017 Alan Jenkins. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import "StockCarController+ActionPhase.h"
 #import "StockCarPlayer.h"
 #import "StockCarController+RefillPhase.h"
@@ -14,21 +15,30 @@
 
 @implementation StockCarController (ActionPhase)
 
+NSMutableArray *ActionPhaseQ;
+StockCarPlayer *overtakingDriver;
+
 -(void) StartActionPhase {
     [self SetPhaseForAllPlayersTo:WAITING];
     [self.gViewCont AllowMultipleSelectedCards:NO];
-    [self.gViewCont HideConfirmationBtn:YES];
+    [self.gViewCont SetConfirmBtnText:@"NEXT DRIVER"];
     
     self.actionPlayer = nil;
     
-    for(StockCarPlayer *p in self.players) {
-        [p StartPlayerActionPhase];
-        [p RegisterContinueSelector:@selector(ContinueActionPhase)];
+    ActionPhaseQ = [[NSMutableArray alloc]initWithArray:self.players];
+    for(StockCarPlayer *p in ActionPhaseQ)
+    {
+        if(p.Kind == SLOW_CAR)
+            [ActionPhaseQ removeObject:p]; //Avoid SlowCar being treated like a player
+        else
+            [p RegisterContinueSelector:@selector(ContinueActionPhase)];
     }
-        
-
-    self.actionPlayer = [self NextPlayer];
+    [self.gViewCont HideContinueBtn:YES];
+    
+    self.actionPlayer = [self NextActionPlayer];
+    [ActionPhaseQ removeObject:self.actionPlayer];
     [self.actionPlayer setPhase:ACTION];
+    [self.actionPlayer StartPlayerActionPhase];
 
     //Choose players in the right order. Top Quali card value I think
     // They get control of the UI and choose action(s) or pass
@@ -52,21 +62,39 @@
 }
 
 -(void) ContinueActionPhase {
-        [self.actionPlayer MakeActionSelection:nil Response:PASS_INSIDE];
-}
-
-
--(void) ActionPhaseDoneBy:(StockCarPlayer *)p {
-    [p setActionRoundComplete:YES];
-    self.actionPlayer = [self NextPlayer];
-    if(!self.actionPlayer)
-        [self FinishActionPhase]; //Everybody done
-    else {
+    [self.actionPlayer ClearCardsFromTable];
+    if([ActionPhaseQ count] != 0)
+    {        
+        self.actionPlayer = [self NextActionPlayer];
+        [ActionPhaseQ removeObject:self.actionPlayer];
         [self.actionPlayer setPhase:ACTION];
-        [self.actionPlayer RegisterContinueSelector:@selector(ContinueActionPhase)];
         [self.actionPlayer StartPlayerActionPhase];
     }
+    else
+        [self FinishActionPhase];
 }
+
+-(StockCarPlayer*)NextActionPlayer
+{
+
+    if(ActionPhaseQ.count == 0)
+        return nil;
+    
+    int HighestQTime = 0;
+    StockCarPlayer *nextPlayer = [ActionPhaseQ firstObject];
+    for(StockCarPlayer *p in ActionPhaseQ)
+    {
+        if(p.Kind == SLOW_CAR)
+            break;
+        if([p TopDiscardQTime] > HighestQTime) {
+            HighestQTime = [p TopDiscardQTime];
+            nextPlayer = p;
+        }
+    }
+    // probably should consdier ties in this search
+    return nextPlayer;
+}
+
 
 -(void) SortPlayersByLeadDraft {
     NSSortDescriptor *LeadSort =  [[NSSortDescriptor alloc]initWithKey:@"LeadDraftPosition" ascending:YES];
@@ -160,20 +188,36 @@
         return;
     }
     [target setPhase:RESPOND];
-    [target RespondToPass];
-    self.actionPlayer = p; //This should already be set but just in case
+    [target RespondToPassAttemptWithCard:c];
+    overtakingDriver = self.actionPlayer; //store the action driver for later
+    self.actionPlayer = target; //responding player gets focus for now
 }
 
 -(void) ResponseToOvertake:(StockCarPlayer *)t WithCard:(DriverCard*)c {
     [t setPhase:WAITING];
+    self.actionPlayer = overtakingDriver; // overtaking player becomes action player again
+    overtakingDriver = nil; // just to be sure nothing stays in here...
     [self CompleteOvertakeBy:self.actionPlayer on:t withResponseCard:c];
+}
+
+-(void) ContinueAfterPassAttempt
+{
+    [self.actionPlayer setPhase:ACTION];
+    [self.actionPlayer RegisterContinueSelector:@selector(ContinueActionPhase)];
+    [self.gViewCont SetContinueBtnText:@"NEXT DRIVER"];
+    [self.gViewCont UpdateLeadDraftDisplay];
+    [self.actionPlayer StartPlayerActionPhase];
 }
 
 -(void) CompleteOvertakeBy:(StockCarPlayer *)p on:(StockCarPlayer *)t withResponseCard:(DriverCard*)response {
 
+    [self.gViewCont HideConfirmationBtn:YES];
+    [self.gViewCont HideContinueBtn:NO];
+    [self.actionPlayer RegisterContinueSelector:@selector(ContinueAfterPassAttempt)];
     if(response) //Target played a response card
         switch (response.Action) {
             case BLOCK:
+                [self.gViewCont SetContinueBtnText:@"BLOCKED!"];
                 return;
             case CHALLENGE: {
                 [p DrawCardToDiscard];
@@ -184,6 +228,7 @@
                 }
                 
                 if([p TopDiscardQTime] < [t TopDiscardQTime]) {
+                    [self.gViewCont SetContinueBtnText:@"BLOCKED!"];
                     return; // otherwise we drop out of here and do the overtake
                 }
                 break;
@@ -194,7 +239,8 @@
     // No response played or failed challenge by blocker - auto overtake
     t.LeadDraftPosition++;
     p.LeadDraftPosition--;
-    [self.gViewCont UpdateLeadDraftDisplay];
+    [self.gViewCont SetContinueBtnText:@"SUCCESS!"];
+    //[self.actionPlayer StartPlayerActionPhase];
 }
 
 -(void) AttemptPullAwayBy:(StockCarPlayer *)p {

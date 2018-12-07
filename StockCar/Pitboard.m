@@ -111,7 +111,8 @@
     NSString *pos1 = @"0";
     NSString *pos2;
     NSString *numS = [[NSNumber numberWithInt:num]stringValue];
-
+    _lapsRemaining = num;
+    
     if(numS.length == 2)
         pos1 = [numS substringToIndex:0];
     pos2 = [numS substringFromIndex:0];

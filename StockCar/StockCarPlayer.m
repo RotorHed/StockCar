@@ -26,7 +26,7 @@
     _drawPile = [[NSMutableArray alloc]initWithArray:l.deck];
     _discardPile = [[NSMutableArray alloc]init];
     _hand = [[NSMutableArray alloc]init];
-    self.ShuffleDrawPile;
+    [self ShuffleDrawPile];
     
     NSString *carTex;
     switch(p) {
@@ -36,11 +36,11 @@
             break;
         case 1:
             carTex = @"nascarRed46";
-            _Kind = AI;
+            _Kind = HUMAN;
             break;
         case 2:
             carTex = @"nascarBlue46";
-            _Kind = AI;
+            _Kind = HUMAN;
             break;
     }
     
@@ -94,7 +94,6 @@
         [_hand addObject:[_drawPile lastObject]];
         [_drawPile removeLastObject];
     }
-    [self UpdatePlayDisplay];
     return _hand;
 }
 
@@ -106,13 +105,6 @@
             [_hand addObject:[_drawPile lastObject]];
             [_drawPile removeLastObject];
         }
-    if (_Kind == HUMAN)
-    {
-        _dash = [[Dashboard alloc]init];
-        [_GameTable AddToScene:(SKSpriteNode*)_dash];
-        [_dash setHidden:NO];
-    }
-    [self UpdatePlayDisplay];
     return _hand;
 }
 
@@ -127,20 +119,17 @@
 -(void) PlayCard:(DriverCard*) Card {
     [_discardPile addObject:Card];
     [_hand removeObject:Card];
-    [self UpdatePlayDisplay];
 }
 
 -(void) CardsDiscarded:(NSMutableArray*)Cards {
     [_discardPile addObjectsFromArray:Cards];
     [_hand removeObjectsInArray:Cards];
-    [self UpdatePlayDisplay];
 }
 
 -(void) CardDiscarded:(DriverCard*)Card {
     if(Card) {
         [_discardPile addObject:Card];
         [_hand removeObject:Card];
-        [self UpdatePlayDisplay];
     }
 }
 
@@ -149,13 +138,11 @@
         [_hand addObject:[_drawPile lastObject]];
         [_drawPile removeLastObject];
     }
-    [self UpdatePlayDisplay];
 }
 
 -(void) DrawCardToDiscard {
     [_discardPile addObject:[_drawPile lastObject]];
     [_drawPile removeLastObject];
-    [self UpdatePlayDisplay];
 }
 
 -(NSMutableArray*) PlayerHand {
@@ -188,21 +175,28 @@
     [self setPosition:CGPointMake(self.position.x, self.position.y+80)];
 }
 
+-(void) ClearCardsFromTable {
+    [_GameTable ClearPlayerHandFromTableWithHand:self.hand andDiscards:self.discardPile];
+    [_dash setHidden:YES];
+}
+
 -(void) UpdatePlayDisplay {
     if(_Kind == HUMAN) {
-        [_GameTable setActionPlayer:self];
+        //[_GameTable setActionPlayer:self];
         [_GameTable PlaceCardsInDriverDiscard:_discardPile];
         [_GameTable DisplayHandOfPlayer:_hand];
         [_GameTable UpdateDriverDeckRemaining:(int)_drawPile.count];
         
-        [_dash SetHandCount:(int)_hand.count Of:_MaxHandSize];
-        [_dash SetActionUsed:_actionsTakenThisRound Of:_MaxActions];
-        [_dash SetRefillCount:_RefillMax];
+        [_Controller.pitBoard playerNumber:self.Number+1];
+        [_dash SetActionUsed:self.actionsTakenThisRound Of:self.MaxActions];
+        [_dash SetHandCount:(int)[self.hand count] Of:self.MaxHandSize];
+        [_dash SetRefillCount:self.RefillMax];
+        [_dash setHidden:NO];
     }
-    else if(_Kind == AI)
-    {
-        [_GameTable DisplayNonPlayerDiscardsForPlayer:self Cards:self.discardPile];
-    }
+    //else if(_Kind == AI)
+//    {
+//        [_GameTable DisplayNonPlayerDiscardsForPlayer:self Cards:self.discardPile];
+//    }
 }
 
 -(void) DNF {
@@ -219,13 +213,11 @@
 -(void) SortHandByLaps {
     NSSortDescriptor *lapSrt = [[NSSortDescriptor alloc]initWithKey:@"lapsCompleted" ascending:YES];
     [_hand sortUsingDescriptors:@[lapSrt]];
-    [self UpdatePlayDisplay];
 }
 
 -(void) SortHandByType {
     NSSortDescriptor *typSrt = [[NSSortDescriptor alloc]initWithKey:@"Type" ascending:YES];
     [_hand sortUsingDescriptors:@[typSrt]];
-    [self UpdatePlayDisplay];
 }
 
 -(void) refillHand {  
@@ -299,7 +291,6 @@
                 [self performSelector:_confirmButtonSel withObject:[data firstObject]];
         }
     }
-    
 }
 
 -(void) RegisterContinueSelector:(SEL)sel {
